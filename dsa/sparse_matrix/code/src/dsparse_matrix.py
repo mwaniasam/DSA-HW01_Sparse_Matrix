@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     # Define input file paths
     file1 = os.path.join(input_dir, "matrixfile1.txt")
-    file2 = os.path.join(input_dir, "matrixfile1 copy.txt")
+    file2 = os.path.join(input_dir, "matrixfile2.txt")
 
     # Load matrices from files
     try:
@@ -203,24 +203,25 @@ if __name__ == "__main__":
     choice = input("Enter your choice (1/2/3/4): ")
 
     try:
+        # Generate a unique timestamp for the filename
+        timestamp = int(time.time())
+
         if choice == "1":
             result = matrix1.add(matrix2)
             operation_name = "addition"
-            file_name = os.path.join(output_dir, "result_addition.txt")
+            file_name = os.path.join(output_dir, f"result_addition_{timestamp}.txt")
         elif choice == "2":
             result = matrix1.subtract(matrix2)
             operation_name = "subtraction"
-            file_name = os.path.join(output_dir, "result_subtraction.txt")
+            file_name = os.path.join(output_dir, f"result_subtraction_{timestamp}.txt")
         elif choice == "3":
             result = matrix1.multiply(matrix2)
             operation_name = "multiplication"
-            file_name = os.path.join(output_dir, "result_multiplication.txt")
+            file_name = os.path.join(output_dir, f"result_multiplication_{timestamp}.txt")
         elif choice == "4":
             scalar = int(input("Enter the scalar value (integer): "))
             result = matrix1.multiply_scalar(scalar)
             operation_name = f"scalar_multiplication_{scalar}"
-            # Generate a unique filename using a timestamp
-            timestamp = int(time.time())
             file_name = os.path.join(output_dir, f"result_scalar_multiplication_{scalar}_{timestamp}.txt")
         else:
             print("Invalid choice. Exiting.")
