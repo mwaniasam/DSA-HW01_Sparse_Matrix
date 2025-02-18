@@ -154,8 +154,8 @@ class SparseMatrix:
 if __name__ == "__main__":
     # Set the base path for input files
     base_path = os.path.join(os.getcwd(), "dsa", "sparse_matrix", "sample_inputs")
-    file1 = os.path.join(base_path, r"C:\Users\LENOVO\OneDrive\Desktop\DSA\matrixfile1.txt")
-    file2 = os.path.join(base_path, r"C:\Users\LENOVO\OneDrive\Desktop\DSA\matrixfile1 copy.txt")
+    file1 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile1.txt")
+    file2 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile1 copy.txt")
 
     # Load matrices from files
     try:
