@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     # Define input file paths
     file1 = os.path.join(input_dir, "matrixfile1.txt")
-    file2 = os.path.join(input_dir, "matrixfile2.txt")
+    file2 = os.path.join(input_dir, "matrixfile1 copy.txt")
 
     # Load matrices from files
     try:

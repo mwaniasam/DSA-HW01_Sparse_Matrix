@@ -16,7 +16,10 @@ dsa/
 │   ├── sample_inputs/
 │   │   ├── matrixfile1.txt            # Sample input file 1
 │   │   ├── matrixfile2.txt            # Sample input file 2
-│   │   └── result_matrix.txt          # Output file for results
+│   ├── sample_result/
+│   │   ├── result_addition_123.txt    # Sample result file
+│   │   ├── result_substraction_7890.txt            
+│   │   └── result_multiplication_0987.txt          
 └── README.md                          # This file
 ```
 
