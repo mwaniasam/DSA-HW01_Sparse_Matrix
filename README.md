@@ -11,7 +11,7 @@ dsa/
 ├── sparse_matrix/
 │   ├── code/
 │   │   └── src/
-│   │       └── sparse_matrix.py       # Main Python script
+│   │       └── dsparse_matrix.py       # Main Python script
 │   ├── sample_inputs/
 │   │   ├── matrixfile1.txt            # Sample input file 1
 │   │   ├── matrixfile2.txt            # Sample input file 2
