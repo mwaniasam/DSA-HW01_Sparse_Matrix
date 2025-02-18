@@ -72,6 +72,7 @@ cols=3180
   - Addition
   - Subtraction
   - Multiplication
+  - Scalar Multiplicatio
 - **Input Validation**:
   - Checks for invalid formats, floating-point values, and mismatched dimensions.
 - **User Interaction**:
@@ -132,7 +133,8 @@ cols=3180
    1. Addition
    2. Subtraction
    3. Multiplication
-   Enter your choice (1/2/3): 1
+   4. Scalar Multiplication
+   Enter your choice (1/2/3/4): 1
    Result of Addition:
    {(0, 0): 5, (1, 1): 7, (2, 2): 9}
    Do you want to save the result? (yes/no): yes
