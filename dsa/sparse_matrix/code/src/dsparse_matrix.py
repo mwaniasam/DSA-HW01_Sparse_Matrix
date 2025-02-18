@@ -129,20 +129,27 @@ class SparseMatrix:
         if self.cols != other.rows:
             raise ValueError("Number of columns in the first matrix must equal the number of rows in the second matrix for multiplication.")
 
-        # Transpose the second matrix for efficient column access
-        other_transpose = {}
-        for (row, col), value in other.matrix.items():
-            if col not in other_transpose:
-                other_transpose[col] = {}
-            other_transpose[col][row] = value
-
         result = SparseMatrix(rows=self.rows, cols=other.cols)
 
-        # Perform multiplication
         for (i, k), v in self.matrix.items():
-            if k in other_transpose:
-                for j, other_value in other_transpose[k].items():
-                    result.set_element(i, j, result.get_element(i, j) + v * other_value)
+            for j in range(other.cols):
+                if (k, j) in other.matrix:
+                    result.set_element(i, j, result.get_element(i, j) + v * other.matrix[(k, j)])
+
+        return result
+
+    def multiply_scalar(self, scalar):
+        """
+        Multiplies the matrix by a scalar value.
+        Args:
+            scalar (int): The scalar value to multiply with.
+        Returns:
+            SparseMatrix: The result of the scalar multiplication.
+        """
+        result = SparseMatrix(rows=self.rows, cols=self.cols)
+
+        for (row, col), value in self.matrix.items():
+            result.set_element(row, col, value * scalar)
 
         return result
 
@@ -162,8 +169,8 @@ class SparseMatrix:
 if __name__ == "__main__":
     # Set the base path for input files
     base_path = os.path.join(os.getcwd(), "dsa", "sparse_matrix", "sample_inputs")
-    file1 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile1.txt")
-    file2 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile2.txt")
+    file1 = os.path.join(base_path, "matrixfile1.txt")
+    file2 = os.path.join(base_path, "matrixfile2.txt")
 
     # Load matrices from files
     try:
@@ -182,8 +189,9 @@ if __name__ == "__main__":
     print("1. Addition")
     print("2. Subtraction")
     print("3. Multiplication")
+    print("4. Scalar Multiplication")
 
-    choice = input("Enter your choice (1/2/3): ")
+    choice = input("Enter your choice (1/2/3/4): ")
 
     try:
         if choice == "1":
@@ -195,6 +203,10 @@ if __name__ == "__main__":
         elif choice == "3":
             result = matrix1.multiply(matrix2)
             operation_name = "Multiplication"
+        elif choice == "4":
+            scalar = int(input("Enter the scalar value (integer): "))
+            result = matrix1.multiply_scalar(scalar)
+            operation_name = f"Scalar Multiplication (by {scalar})"
         else:
             print("Invalid choice. Exiting.")
             exit()
