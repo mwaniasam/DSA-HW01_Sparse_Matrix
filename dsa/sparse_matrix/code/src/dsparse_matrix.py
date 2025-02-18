@@ -129,12 +129,20 @@ class SparseMatrix:
         if self.cols != other.rows:
             raise ValueError("Number of columns in the first matrix must equal the number of rows in the second matrix for multiplication.")
 
+        # Transpose the second matrix for efficient column access
+        other_transpose = {}
+        for (row, col), value in other.matrix.items():
+            if col not in other_transpose:
+                other_transpose[col] = {}
+            other_transpose[col][row] = value
+
         result = SparseMatrix(rows=self.rows, cols=other.cols)
 
+        # Perform multiplication
         for (i, k), v in self.matrix.items():
-            for j in range(other.cols):
-                if (k, j) in other.matrix:
-                    result.set_element(i, j, result.get_element(i, j) + v * other.matrix[(k, j)])
+            if k in other_transpose:
+                for j, other_value in other_transpose[k].items():
+                    result.set_element(i, j, result.get_element(i, j) + v * other_value)
 
         return result
 
@@ -155,7 +163,7 @@ if __name__ == "__main__":
     # Set the base path for input files
     base_path = os.path.join(os.getcwd(), "dsa", "sparse_matrix", "sample_inputs")
     file1 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile1.txt")
-    file2 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile1 copy.txt")
+    file2 = os.path.join(base_path, r"C:\Users\LENOVO\.vscode\DSA-HW01_Sparse_Matrix\dsa\sparse_matrix\sample_inputs\matrixfile2.txt")
 
     # Load matrices from files
     try:
