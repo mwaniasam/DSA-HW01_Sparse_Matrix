@@ -1,4 +1,5 @@
 import os
+import time  # Import the time module to generate unique filenames
 
 class SparseMatrix:
     def __init__(self, file_path=None, rows=0, cols=0):
@@ -167,10 +168,18 @@ class SparseMatrix:
 
 
 if __name__ == "__main__":
-    # Set the base path for input files
-    base_path = os.path.join(os.getcwd(), "dsa", "sparse_matrix", "sample_inputs")
-    file1 = os.path.join(base_path, "matrixfile1.txt")
-    file2 = os.path.join(base_path, "matrixfile2.txt")
+    # Set the base path for input and output files
+    base_path = os.path.join(os.getcwd(), "dsa", "sparse_matrix")
+    input_dir = os.path.join(base_path, "sample_inputs")
+    output_dir = os.path.join(base_path, "sample_results")
+
+    # Create the output directory if it doesn't exist
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # Define input file paths
+    file1 = os.path.join(input_dir, "matrixfile1.txt")
+    file2 = os.path.join(input_dir, "matrixfile1 copy.txt")
 
     # Load matrices from files
     try:
@@ -196,17 +205,23 @@ if __name__ == "__main__":
     try:
         if choice == "1":
             result = matrix1.add(matrix2)
-            operation_name = "Addition"
+            operation_name = "addition"
+            file_name = os.path.join(output_dir, "result_addition.txt")
         elif choice == "2":
             result = matrix1.subtract(matrix2)
-            operation_name = "Subtraction"
+            operation_name = "subtraction"
+            file_name = os.path.join(output_dir, "result_subtraction.txt")
         elif choice == "3":
             result = matrix1.multiply(matrix2)
-            operation_name = "Multiplication"
+            operation_name = "multiplication"
+            file_name = os.path.join(output_dir, "result_multiplication.txt")
         elif choice == "4":
             scalar = int(input("Enter the scalar value (integer): "))
             result = matrix1.multiply_scalar(scalar)
-            operation_name = f"Scalar Multiplication (by {scalar})"
+            operation_name = f"scalar_multiplication_{scalar}"
+            # Generate a unique filename using a timestamp
+            timestamp = int(time.time())
+            file_name = os.path.join(output_dir, f"result_scalar_multiplication_{scalar}_{timestamp}.txt")
         else:
             print("Invalid choice. Exiting.")
             exit()
@@ -218,15 +233,8 @@ if __name__ == "__main__":
         # Prompt user to save result
         save_choice = input("Do you want to save the result? (yes/no): ")
         if save_choice.lower() == "yes":
-            file_name = input("Enter a file name to save the result (e.g., my_matrix.txt): ")
-            file_path = os.path.join(base_path, file_name)
-            dir_path = os.path.dirname(file_path)
-            
-            if not os.path.exists(dir_path):
-                os.makedirs(dir_path)
-            
-            result.save_to_file(file_path)
-            print(f"Result saved to {file_path}")
+            result.save_to_file(file_name)
+            print(f"Result saved to {file_name}")
         else:
             print("Result not saved.")
     except Exception as e:
